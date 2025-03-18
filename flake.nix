@@ -18,6 +18,7 @@
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
         inputs.kolide-launcher.nixosModules.kolide-launcher
+        ./modules/vanta-agent.nix
       ];
 
       # Enable vpn service
