@@ -15,22 +15,15 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [self.overlays.default];
     };
   in {
     packages.${system} = {
-      openlens = pkgs.openlens;
-      vanta-agent = pkgs.vanta-agent;
-    };
-
-    overlays.default = final: prev: {
-      openlens = final.callPackage ./packages/openlens.nix {};
-      vanta-agent = final.callPackage ./packages/vanta-agent.nix {};
+      openlens = pkgs.callPackage ./packages/openlens.nix {};
     };
 
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
-        ./modules
+        ./modules/vanta-agent
         inputs.kolide-launcher.nixosModules.kolide-launcher
       ];
 

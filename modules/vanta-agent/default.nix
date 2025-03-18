@@ -8,7 +8,7 @@
 in {
   options.services.vanta-agent = with lib; {
     enable = mkEnableOption "Vanta Agent";
-    package = mkPackageOption pkgs "vanta-agent" {};
+    package = pkgs.callPackage ./package.nix {};
   };
 
   config = with lib;

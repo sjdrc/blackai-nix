@@ -1,5 +1,0 @@
-{...}: {
-  imports = [
-    ./vanta-agent.nix
-  ];
-}
