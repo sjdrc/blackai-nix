@@ -27,6 +27,9 @@
       # Enable machine compliance tool
       services.kolide-launcher.enable = true;
 
+      # Enable vanta agent
+      services.vanta-agent.enable = true;
+
       # Enable antivirus
       services.clamav.daemon.enable = true;
       services.clamav.updater.enable = true;
