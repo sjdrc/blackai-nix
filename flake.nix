@@ -12,13 +12,26 @@
     nixpkgs,
     ...
   } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [self.overlays.default];
+    };
   in {
-    packages = import ./packages {inherit nixpkgs;};
+    packages.${system} = {
+      openlens = pkgs.openlens;
+      vanta-agent = pkgs.vanta-agent;
+    };
+
+    overlays.default = final: prev: {
+      openlens = final.callPackage ./packages/openlens.nix {};
+      vanta-agent = final.callPackage ./packages/vanta-agent.nix {};
+    };
 
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
+        ./modules
         inputs.kolide-launcher.nixosModules.kolide-launcher
-        ./modules/vanta-agent.nix
       ];
 
       # Enable vpn service
