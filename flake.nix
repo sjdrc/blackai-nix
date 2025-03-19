@@ -18,6 +18,9 @@
     pkgs = import nixpkgs {
       inherit system;
     };
+    nur-modules = import inputs.nur {
+
+    };
   in {
     packages.${system} = {
       openlens = pkgs.callPackage ./packages/openlens.nix {};
@@ -26,7 +29,7 @@
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
         inputs.kolide-launcher.nixosModules.kolide-launcher
-        inputs.nur.modules.nixos.default
+        inputs.nur.legacyPackages.${system}.repos.kokakiwi.modules.vanta-agent
       ];
 
       # Enable vpn service
