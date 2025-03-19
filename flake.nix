@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*";
 
+    nur.url = "github:nix-community/NUR";
+
     kolide-launcher.url = "github:kolide/nix-agent/main";
   };
 
@@ -23,8 +25,8 @@
 
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
-        ./modules/vanta-agent
         inputs.kolide-launcher.nixosModules.kolide-launcher
+        inputs.nur.modules.nixos.default
       ];
 
       # Enable vpn service
