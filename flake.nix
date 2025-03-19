@@ -29,7 +29,7 @@
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
         inputs.kolide-launcher.nixosModules.kolide-launcher
-        inputs.nur.legacyPackages.${system}.repos.kokakiwi.modules.vanta-agent
+        inputs.nur.legacyPackages.${system}.repos.kokakiwi.modules.nixos.vanta-agent
       ];
 
       # Enable vpn service
