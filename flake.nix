@@ -58,6 +58,7 @@
         slack
         # Development
         openlens
+        kubectl
         stern # for @andrea-falco/lens-multi-pod-logs extension
         kubelogin-oidc
         (pkgs.google-cloud-sdk.withExtraComponents [pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin])
