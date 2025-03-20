@@ -18,18 +18,18 @@
     pkgs = import nixpkgs {
       inherit system;
     };
-    nur-modules = import inputs.nur {
-
+    nur = import inputs.nur {
+      inherit pkgs;
+      nurpkgs = pkgs;
     };
   in {
-    packages.${system} = {
-      openlens = pkgs.callPackage ./packages/openlens.nix {};
-    };
+    packages.openlens = pkgs.callPackage ./packages/openlens.nix {};
 
     nixosModules.blackai = {pkgs, ...}: {
       imports = [
         inputs.kolide-launcher.nixosModules.kolide-launcher
-        inputs.nur.legacyPackages.${system}.repos.kokakiwi.modules.nixos.vanta-agent
+        inputs.nur.modules.nixos.default
+        nur.repos.kokakiwi.modules.nixos.services.vanta-agent
       ];
 
       # Enable vpn service
@@ -40,6 +40,7 @@
 
       # Enable vanta agent
       services.vanta-agent.enable = true;
+      services.vanta-agent.package = nur.repos.kokakiwi.vanta-agent;
 
       # Enable antivirus
       services.clamav.daemon.enable = true;
